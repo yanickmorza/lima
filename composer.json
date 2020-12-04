@@ -1,8 +1,8 @@
 {
-    "name": "yanickmorza/projetym",
+    "name": "yanickmorza/lima",
     "type": "library",
     "description": "Light Interface Maker Application",
-    "homepage": "https://github.com/yanickmorza/projetym",
+    "homepage": "https://github.com/yanickmorza/lima",
     "license": "MIT",
     "authors": [
         {
