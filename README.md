@@ -5,7 +5,7 @@
 
 # Installation et lancement
 
-<code>- 1 - composer create-project -s dev yanickmorza/projetym nom_de_votre_projet</code>
+<code>- 1 - composer create-project -s dev yanickmorza/lima nom_projet</code>
 
 - 2 - Supprimer le fichier : composer.json et renommer le fichier composer-SF5.txt en : composer.json (ou remplacer son contenu par celui de composer-SF5.txt)
 
