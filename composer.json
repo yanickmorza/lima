@@ -1,0 +1,22 @@
+{
+    "name": "yanickmorza/projetym",
+    "type": "library",
+    "description": "Light Interface Maker Application",
+    "homepage": "https://github.com/yanickmorza/projetym",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yanick Morza",
+            "email": "yanick.morza@free.fr"
+        }
+    ],
+    "require": {
+        "php": "^7.2"
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
