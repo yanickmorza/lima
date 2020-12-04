@@ -15,5 +15,7 @@
 
 - 5 - Lancer votre serveur web Symfony (http ou https) : 
 <code>symfony serve</code>
+ou 
+<code>php -S localhost:8000 -t public/</code>
 
 - 6 - Lancer un navigateur internet récent (à jour) : <a href="https://localhost:8000/lima/">https://localhost:8000/lima/</a>
