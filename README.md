@@ -1,5 +1,5 @@
 # LIMA - Light Interface Maker Application
-- C'est une application développée en PHP pour le Framework Symfony versions 4 et +.
+- C'est une application développée en PHP pour le Framework Symfony <code>Versions 4 et 5</code>.
 - Elle permet principalement de générer des SCRUD pour un Back-Office (Seach, Create, Read, Update, Delete).
 - Mais elle n'est pas uniquement dédiée qu'à cette tache.
 - Elle également en mesure de concevoir une application multicomplexe en Symfony avec 60% de No-code, le reste est à votre libre imagination.
