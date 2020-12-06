@@ -2,8 +2,8 @@
 - C'est une application développée en PHP pour Symfony permettant principalement de générer des SCRUD pour un Back-Office (Seach, Create, Read, Update, Delete).
 - Mais elle n'est pas uniquement dédiée qu'à cette tache.
 - Elle également en mesure de concevoir une application multicomplexe en Symfony avec 60% de No-code, le reste est à votre libre imagination.
-- Prérequis PHP-7.2, Base de données PostgreSQL.
-- L'ORM LIMA dédié à MySQL est en cours de développement.
+- Prérequis : <code>une version PHP-7.2 et une base de données PostgreSQL</code>
+- L'ORM LIMA orienté également vers une base de données MySQL est en cours de développement.
 
 # Installation et lancement
 
