@@ -7,15 +7,20 @@
 
 <code>- 1 - composer create-project -s dev yanickmorza/lima nom_projet</code>
 
-- 2 - Supprimer le fichier : composer.json et renommer le fichier composer-SF5.txt en : composer.json (ou remplacer son contenu par celui de composer-SF5.txt)
+- ou
+<code>- 1 - git clone https://github.com/yanickmorza/lima.git nom_projet</code>
+
+- 2 - Supprimer le fichier : composer.json et renommer le fichier composer-SF5.txt en : composer.json 
+- 2 ou alors remplacer son contenu par celui de composer-SF5.txt
 
 <code>- 3 - composer update</code>
 
-- 4 - Modifier le mot de passe PostgreSQL du fichier se trouvant dans /src/LimaBundle/Services/ConnexionDatabase.php
+- 4 - Modifier le mot de passe PostgreSQL du fichier se trouvant dans
+<code>/src/LimaBundle/Services/ConnexionDatabase.php</code>
 
-- 5 - Lancer votre serveur web Symfony (http ou https) : 
+- 5 - Lancer votre serveur web avec la commande 'Symfony' (http ou https) : 
 <code>symfony serve</code>
-ou 
+- 5 ou alors si vous n'avez pas installé la commande 'Symfony'
 <code>php -S localhost:8000 -t public/</code>
 
 - 6 - Lancer un navigateur internet récent (à jour) : <a href="https://localhost:8000/lima/">https://localhost:8000/lima/</a>
