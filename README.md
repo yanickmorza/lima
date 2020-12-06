@@ -5,14 +5,14 @@
 
 # Installation et lancement
 
-<code>- 1 - composer create-project -s dev yanickmorza/lima nom_projet</code>
+- 1 - <code>composer create-project -s dev yanickmorza/lima nom_projet</code>
 
-<code>- 1 - ou git clone https://github.com/yanickmorza/lima.git nom_projet</code>
+- 1 - <code>git clone https://github.com/yanickmorza/lima.git nom_projet</code>
 
 - 2 - Supprimer le fichier : composer.json et renommer le fichier composer-SF5.txt en : composer.json 
 - 2 - ou alors remplacer son contenu par celui de composer-SF5.txt
 
-<code>- 3 - composer update</code>
+- 3 - <code>composer update</code>
 
 - 4 - Modifier le mot de passe PostgreSQL du fichier se trouvant dans
 <code>/src/LimaBundle/Services/ConnexionDatabase.php</code>
