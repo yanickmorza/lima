@@ -14,7 +14,7 @@
 
 - 3 - <code>composer update</code>
 
-- 4 - Modifier le mot de passe PostgreSQL du fichier se trouvant dans
+- 4 - Ecrire son mot de passe PostgreSQL dans le fichier :
 <code>/src/LimaBundle/Services/ConnexionDatabase.php</code>
 
 - 5 - Lancer votre serveur web avec la commande 'Symfony' (http ou https) : 
