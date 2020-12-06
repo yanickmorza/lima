@@ -1,7 +1,9 @@
 # LIMA - Light Interface Maker Application
-- Un Bundle pour Symfony permettant de créer des SCRUD (Seach, Create, Read, Update, Delete).
-- Concevoir une application avec Symfony simplement tout en restant concentré sur les fonctionnalités.
+- C'est une application développée en PHP pour Symfony permettant principalement de générer des SCRUD pour un Back-Office (Seach, Create, Read, Update, Delete).
+- Mais elle n'est pas uniquement dédiée qu'à cette tache.
+- Elle également en mesure de concevoir une application multicomplexe en Symfony avec 60% de No-code, le reste est à votre libre imagination.
 - Prérequis PHP-7.2, Base de données PostgreSQL.
+- L'ORM LIMA dédié à MySQL est en cours de développement.
 
 # Installation et lancement
 
@@ -10,7 +12,7 @@
 - 1 - <code>git clone https://github.com/yanickmorza/lima.git nom_projet</code>
 
 - 2 - Supprimer le fichier : composer.json et renommer le fichier composer-SF5.txt en : composer.json 
-- 2 - ou alors remplacer son contenu par celui de composer-SF5.txt
+- 2 - ou remplacer son contenu par celui de composer-SF5.txt
 
 - 3 - <code>composer update</code>
 
@@ -19,7 +21,7 @@
 
 - 5 - Lancer votre serveur web avec la commande 'Symfony' (http ou https) : 
 <code>symfony serve</code>
-- 5 ou alors si vous n'avez pas installé la commande 'Symfony' :
+- 5 - si vous n'avez pas installé la commande 'Symfony' :
 <code>php -S localhost:8000 -t public/</code>
 
 - 6 - Lancer un navigateur internet récent (à jour) : <a href="https://localhost:8000/lima/">https://localhost:8000/lima/</a>
