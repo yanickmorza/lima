@@ -10,17 +10,27 @@
 <div class="card-body">
 <form method="post" action="">
     <div class="form-group row">
-    <label for="tables" class="col-2 col-form-label">&nbsp;</label>
-    <div class="form-group row">
+    <div class="col">
             <input type="hidden" name="_token" value="enregistrerrelation">
     </div>
-    <div class="col-10">
+    <div class="col-6">
+    <label for="tables" class="col-2 col-form-label">Tables</label>
         {% for table in listetables %}
             {% if table != 'doctrine_migration_versions' %}
                 <div class="form-group row">
                     <input type="checkbox" name="options[]" value="{{ table }}" title="Cocher la table {{ table }}">
                     &nbsp;&nbsp;
                     <a href="/{{ table }}">{{ table | capitalize }}</a>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="col-5">
+    <label for="tables" class="col-2 col-form-label">Bases</label>
+        {% for bd in listedatabases %}
+            {% if bd != 'postgres' %}
+                <div class="form-group row">
+                    <input type="checkbox" name="othernamespace[]" value="{{ bd }}" title="Cocher la base de donnée concernée {{ bd }}">&nbsp;&nbsp;{{ bd | capitalize }}
                 </div>
             {% endif %}
         {% endfor %}

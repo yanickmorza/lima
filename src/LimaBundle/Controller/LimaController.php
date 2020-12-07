@@ -232,9 +232,10 @@ class LimaController extends AbstractController
             $options = $request->request->get('options', null, true);
             $namespace = $request->request->get('namespace', null, true);
             $relation = $request->request->get('relation', null, true);
+            $othernamespace = $request->request->get('othernamespace', null, true);
 
             foreach ($options as $option) {
-                $scaffoldCrudRelation->genererCrudRelation($option, $namespace, $relation);
+                $scaffoldCrudRelation->genererCrudRelation($option, $namespace, $relation, $othernamespace);
             }
 
             $this->addFlash('success', 'La relation entre ces tables a été un succès');
@@ -621,3 +622,4 @@ class LimaController extends AbstractController
         // ---- Liste database et table ----
     }
 }
+

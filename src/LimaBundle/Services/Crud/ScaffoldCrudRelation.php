@@ -7,7 +7,7 @@ use App\LimaBundle\Services\UtilitaireDatabase;
 class ScaffoldCrudRelation
 {
     // ---- Generer une Relation entre plusieurs tables ----
-    public function genererCrudRelation($objet, $namespace, $relation)
+    public function genererCrudRelation($objet, $namespace, $relation, $othernamespace)
     {
         $utilitaireDatabase = new UtilitaireDatabase;
 
@@ -64,18 +64,88 @@ class ScaffoldCrudRelation
                 $Class = ucfirst(substr($entity, 0, -3)) . "s";
 
                 if ((substr($entity, -3) == "_id") and ($relation == "manytoone")) {
-                    // --- Declaration du private ---
-                    $private_type_entity .= "/**\n\t";
-                    $private_type_entity .= "* @ORM\ManyToOne(targetEntity=\"App\Entity$nameSpace\\$Class\", inversedBy=\"$objet\")\n\t";
-                    $private_type_entity .= "* @ORM\JoinColumn(nullable=false)\n\t";
-                    $private_type_entity .= "*/\n\t";
-                    $private_type_entity .= "private $" . $champ . ";\n\n\t";
-                    // --- Declaration du private ---
 
+                    if ($othernamespace) {
+
+                        foreach ($othernamespace as $NameSpace) {
+
+                            // ---- Inversed By Table dans Base concernee ----
+                            $NameSpace = ucfirst($NameSpace);
+                            $private_type_entity .= "/**\n\t";
+                            $private_type_entity .= "* @ORM\ManyToOne(targetEntity=\"App\Entity\\$NameSpace\\$Class\", inversedBy=\"$objet\")\n\t";
+                            $private_type_entity .= "* @ORM\JoinColumn(nullable=false)\n\t";
+                            $private_type_entity .= "*/\n\t";
+                            $private_type_entity .= "private $" . $champ . ";\n\n\t";
+                            // ---- Inversed By table dans Base concernee ----
+
+                            // ----- Ecrire dans le FORMTYPE -----
+                            $texteUse = "";
+                            $nameSpaceForm = str_replace("\\", "", $namespace);
+                            $mapperUse = "../src/Form" . $nameSpaceForm. "/" . $Objet . "Type.php";
+                            $handleUse = fopen($mapperUse, "r");
+
+                            if ($handleUse) {
+                                while (!feof($handleUse)) {
+                                    $nameSpaceUse = str_replace("\\", "", $nameSpace);
+                                    $bufferUse = fgets($handleUse);
+                                    $texteUse .= str_replace("use App\Entity\\$nameSpaceUse\\$Class;", "use App\Entity\\$NameSpace\\$Class;", $bufferUse);
+                                }
+
+                                $handleUse = fopen($mapperUse, "w+");
+                                fwrite($handleUse, $texteUse);
+                                fclose($handleUse);
+                            }
+                            // ----- Ecrire dans le FORMTYPE -----
+
+                            // ---- Mappage Table dans Base concernee ----
+                            $texte = "";
+                            $path_entity_mapper = "../src/Entity";
+                            $mapper = $path_entity_mapper . "/" . $NameSpace."/".$Class. ".php";
+
+                            if (file_exists($mapper)) {
+
+                                $chaine   = file_get_contents($mapper);
+                                $trouve   = $objet;
+                                $position = strpos($chaine, $trouve);
+        
+                                if ($position === false) {
+                                    $private_mappe .= "/**\n\t";
+                                    $private_mappe .= "* @ORM\OneToMany(targetEntity=\"App\Entity$nameSpace\\$Objet\", mappedBy=\"$champ\")\n\t";
+                                    $private_mappe .= "*/\n\t";
+                                    $private_mappe .= "private $" . $objet . ";\n\t";
+                                    $private_mappe .= "\n\t/*** ***/";
+                                   
+                                    $handle = fopen($mapper, "r");
+        
+                                    if ($handle) {
+                                        while (!feof($handle)) {
+                                            $buffer = fgets($handle);
+                                            $texte .= str_replace("/*** ***/", $private_mappe, $buffer);
+                                        }
+                                        $handle = fopen($mapper, "w+");
+                                        fwrite($handle, $texte);
+                                        fclose($handle);
+                                    }
+                                }
+                            }
+                            // ---- Mappage table dans Base concernee ----
+                        }
+                    }
+                    else {
+                        // --- Declaration du private ---
+                        $private_type_entity .= "/**\n\t";
+                        $private_type_entity .= "* @ORM\ManyToOne(targetEntity=\"App\Entity$nameSpace\\$Class\", inversedBy=\"$objet\")\n\t";
+                        $private_type_entity .= "* @ORM\JoinColumn(nullable=false)\n\t";
+                        $private_type_entity .= "*/\n\t";
+                        $private_type_entity .= "private $" . $champ . ";\n\n\t";
+                        // --- Declaration du private ---
+                    }
+                    
                     // ---- Mapper vers la table de correspondance ----                      
                     $texte = "";
                     $private_mappe = "";
                     $mapper = $path_entity . "/" . $Class . ".php";
+
                     if (file_exists($mapper)) {
                         $chaine   = file_get_contents($mapper);
                         $trouve   = $objet;
@@ -87,8 +157,9 @@ class ScaffoldCrudRelation
                             $private_mappe .= "*/\n\t";
                             $private_mappe .= "private $" . $objet . ";\n\t";
                             $private_mappe .= "\n\t/*** ***/";
-
+                           
                             $handle = fopen($mapper, "r");
+
                             if ($handle) {
                                 while (!feof($handle)) {
                                     $buffer = fgets($handle);
@@ -116,26 +187,62 @@ class ScaffoldCrudRelation
                     // ----- Contruction du Getter et Setter -------
                 }
                 elseif ((substr($entity, -3) == "_id") and ($relation == "onetoone")) {
-                    // --- Declaration du private ---
-                    $private_type_entity .= "/**\n\t";
-                    $private_type_entity .= "* @ORM\OneToOne(targetEntity=\"App\Entity$nameSpace\\$Class\", cascade={\"persist\", \"remove\"})\n\t";                    
-                    $private_type_entity .= "* @ORM\JoinColumn(nullable=false)\n\t";
-                    $private_type_entity .= "*/\n\t";
-                    $private_type_entity .= "private $" . $champ . ";\n\t";
-                    // --- Declaration du private ---
 
-                    // ----- Contruction du Getter et Setter -------
-                    $getter_setter .= "public function get$Champ()\n\t";
-                    $getter_setter .= "{\n\t\t";
-                    $getter_setter .= "return \$this->$champ;\n\t";
-                    $getter_setter .= "}\n\n\t";
+                    if ($othernamespace) {
 
-                    $getter_setter .= "public function set$Champ($$champ)\n\t";
-                    $getter_setter .= "{\n\t\t";
-                    $getter_setter .= "\$this->$champ = $$champ;\n\n\t\t";
-                    $getter_setter .= "return \$this;\n\t";
-                    $getter_setter .= "}\n\n\t";
-                    // ----- Contruction du Getter et Setter -------
+                        foreach ($othernamespace as $NameSpace) {
+
+                            // ---- Inversed By Table dans Base concernee ----
+                            $NameSpace = ucfirst($NameSpace);
+                            $private_type_entity .= "/**\n\t";
+                            $private_type_entity .= "* @ORM\OneToOne(targetEntity=\"App\Entity\\$NameSpace\\$Class\", cascade={\"persist\", \"remove\"})\n\t";
+                            $private_type_entity .= "* @ORM\JoinColumn(nullable=false)\n\t";
+                            $private_type_entity .= "*/\n\t";
+                            $private_type_entity .= "private $" . $champ . ";\n\n\t";
+                            // ---- Inversed By table dans Base concernee ----
+
+                            // ----- Ecrire dans le FORMTYPE -----
+                            $texteUse = "";
+                            $nameSpaceForm = str_replace("\\", "", $namespace);
+                            $mapperUse = "../src/Form" . $nameSpaceForm. "/" . $Objet . "Type.php";
+                            $handleUse = fopen($mapperUse, "r");
+
+                            if ($handleUse) {
+                                while (!feof($handleUse)) {
+                                    $nameSpaceUse = str_replace("\\", "", $nameSpace);
+                                    $bufferUse = fgets($handleUse);
+                                    $texteUse .= str_replace("use App\Entity\\$nameSpaceUse\\$Class;", "use App\Entity\\$NameSpace\\$Class;", $bufferUse);
+                                }
+
+                                $handleUse = fopen($mapperUse, "w+");
+                                fwrite($handleUse, $texteUse);
+                                fclose($handleUse);
+                            }
+                            // ----- Ecrire dans le FORMTYPE -----
+                        }
+                    }
+                    else {
+                        // --- Declaration du private ---
+                        $private_type_entity .= "/**\n\t";
+                        $private_type_entity .= "* @ORM\OneToOne(targetEntity=\"App\Entity$nameSpace\\$Class\", cascade={\"persist\", \"remove\"})\n\t";                    
+                        $private_type_entity .= "* @ORM\JoinColumn(nullable=false)\n\t";
+                        $private_type_entity .= "*/\n\t";
+                        $private_type_entity .= "private $" . $champ . ";\n\t";
+                        // --- Declaration du private ---
+
+                        // ----- Contruction du Getter et Setter -------
+                        $getter_setter .= "public function get$Champ()\n\t";
+                        $getter_setter .= "{\n\t\t";
+                        $getter_setter .= "return \$this->$champ;\n\t";
+                        $getter_setter .= "}\n\n\t";
+
+                        $getter_setter .= "public function set$Champ($$champ)\n\t";
+                        $getter_setter .= "{\n\t\t";
+                        $getter_setter .= "\$this->$champ = $$champ;\n\n\t\t";
+                        $getter_setter .= "return \$this;\n\t";
+                        $getter_setter .= "}\n\n\t";
+                        // ----- Contruction du Getter et Setter -------
+                    }
                 }
                 else {
                     // --- Getters Setters des autres champs de la table ---
