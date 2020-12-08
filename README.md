@@ -26,4 +26,5 @@
 - 1 - si vous n'avez pas installé la commande 'Symfony' :
 <code>php -S localhost:8000 -t public/</code>
 
-- 2 - Ouvrir votre navigateur internet : <a href="https://localhost:8000/lima/">https://localhost:8000/lima/</a>
+- 2 - Ouvrir votre navigateur internet en http : <a href="http://localhost:8000/lima/">http://localhost:8000/lima/</a>
+- 2 - Ouvrir votre navigateur internet en https : <a href="https://localhost:8000/lima/">https://localhost:8000/lima/</a>
