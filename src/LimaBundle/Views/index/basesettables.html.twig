@@ -58,7 +58,7 @@
         {% endif %}
         <option value=""> -- Choisir dans la liste -- </option>
         {% for bd in listedatabases %}
-            {% if bd != 'postgres' %}
+            {% if bd != 'postgres' and bd != 'information_schema' and bd != 'mysql' and bd != 'performance_schema' and bd != 'phpmyadmin' %}
             <option value="{{ bd }}"> -- {{ bd }} -- </option>
             {% endif %}
         {% endfor %}

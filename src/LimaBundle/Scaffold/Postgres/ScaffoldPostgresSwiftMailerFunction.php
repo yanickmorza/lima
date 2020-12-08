@@ -1,10 +1,10 @@
 <?php
 
-namespace App\LimaBundle\Services\Crud;
+namespace App\LimaBundle\Scaffold\Postgres;
 
-class ScaffoldCrudSwiftMailerFunction
+class ScaffoldPostgresSwiftMailerFunction
 {
-    public function swiftMailerFunction($namespace, $objet)
+    public function swiftMailerPostgresFunction($namespace, $objet)
     {
         // ****** Ecriture dans le Controller concerne *******
         if ($namespace !== null) {

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\LimaBundle\Services\Crud;
+namespace App\LimaBundle\Scaffold\Postgres;
 
-class ScaffoldCrudExtension
+class ScaffoldPostgresExtension
 {
     // ---- Generer une extension ----
-    public function genererCrudExtension($objet, $filtre, $namespace)
+    public function genererPostgresExtension($objet, $filtre, $namespace)
     {
         if ($filtre == "OUI") {
 
@@ -76,7 +76,7 @@ class $ObjetExtension extends AbstractExtension
     // ---- Generer une extension ----
 
     // --- Supprimer une extension ---
-    public function supprimerCrudExtension($objet, $namespace)
+    public function supprimerPostgresExtension($objet, $namespace)
     {
         if ($namespace !== null) {
             $path_extension = "../src/Twig/".$namespace;

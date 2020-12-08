@@ -1,13 +1,13 @@
 <?php
 
-namespace App\LimaBundle\Services\Crud;
+namespace App\LimaBundle\Scaffold\Postgres;
 
-use App\LimaBundle\Services\UtilitaireDatabase;
+use App\LimaBundle\Scaffold\UtilitaireDatabase;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class ScaffoldCrudEnvironnement
+class ScaffoldPostgresEnvironnement
 {
-    public function envDoctrineYaml()
+    public function envDoctrinePostgresYaml()
     {
         $session = new Session();
         $utilitaireDatabase = new UtilitaireDatabase;

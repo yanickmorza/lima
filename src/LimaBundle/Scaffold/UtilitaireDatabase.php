@@ -1,8 +1,8 @@
 <?php
 
-namespace App\LimaBundle\Services;
+namespace App\LimaBundle\Scaffold;
 
-use App\LimaBundle\Services\ConnexionDatabase;
+use App\LimaBundle\Scaffold\ConnexionDatabase;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class UtilitaireDatabase
@@ -12,7 +12,6 @@ class UtilitaireDatabase
 	{
 		$ConnexionDatabase = new ConnexionDatabase;
 		$sql = "SELECT datname FROM pg_database WHERE datistemplate = false ORDER BY datname";
-		//$sql = "SHOW DATABASES";
 		$stmt = $ConnexionDatabase->db_connect()->prepare($sql);
 		$stmt->execute();
 
@@ -28,7 +27,6 @@ class UtilitaireDatabase
 	{
 		$ConnexionDatabase = new ConnexionDatabase;
 		$sql = "SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' ORDER BY table_name";
-		//$sql = "SHOW TABLES";	
 		$stmt = $ConnexionDatabase->db_connect()->prepare($sql);
 		$stmt->execute();
 

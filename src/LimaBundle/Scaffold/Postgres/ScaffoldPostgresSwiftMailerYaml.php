@@ -1,10 +1,10 @@
 <?php
 
-namespace App\LimaBundle\Services\Crud;
+namespace App\LimaBundle\Scaffold\Postgres;
 
-class ScaffoldCrudSwiftMailerYaml
+class ScaffoldPostgresSwiftMailerYaml
 {
-    public function swiftMailerYaml($transport, $encryption, $auth_mode, $host, $port, $username, $password)
+    public function swiftMailerPostgresYaml($transport, $encryption, $auth_mode, $host, $port, $username, $password)
     {
         // **** Ecriture dans le fichier swiftmailer.yaml ****
         $path_swiftmaileryaml = "../config/packages/swiftmailer.yaml";
@@ -61,7 +61,7 @@ class SwiftMailerClass
         // ------------ Class SwiftMailerClass ------------
     }
 
-    public function supprimerSwiftMailerClass()
+    public function supprimerSwiftMailerPostgresClass()
     {
         $swiftmailer = "../src/Swiftmailer";
         if (is_dir($swiftmailer)) {

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\LimaBundle\Services\Crud;
+namespace App\LimaBundle\Scaffold\Postgres;
 
-use App\LimaBundle\Services\UtilitaireDatabase;
+use App\LimaBundle\Scaffold\UtilitaireDatabase;
 
-class ScaffoldCrudTestEntity
+class ScaffoldPostgresTestEntity
 {
     // ---- Generer un TestEntity ----
-    public function genererCrudTestEntity($objet, $namespace)
+    public function genererPostgresTestEntity($objet, $namespace)
     {
         $utilitaireDatabase = new UtilitaireDatabase;
 
@@ -118,7 +118,7 @@ class $ObjetCreate extends TestCase
     // ---- Generer un TestEntity ----
 
     // --- Supprimer un TestEntity ---
-    public function supprimerCrudTestEntity($objet, $namespace)
+    public function supprimerPostgresTestEntity($objet, $namespace)
     {
         if ($namespace !== null) {
             $path_test_entity = "../tests/Entity/".$namespace."/".ucfirst($objet)."Test.php";

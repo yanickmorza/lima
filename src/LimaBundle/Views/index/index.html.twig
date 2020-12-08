@@ -23,13 +23,13 @@
 		<div class="col">
 			<div class="card mb-3 ml-3 mr-3 mt-3">
 				<div class="card-header breadcrumb-item small">
-					{% if bd != 'postgres' %}
+					{% if bd != 'postgres' and bd != 'information_schema' and bd != 'mysql' and bd != 'performance_schema' and bd != 'phpmyadmin' %}
 						Liste des projets
 					{% endif %}
 				</div>
 				<div class="card-body m-3 p-3">
 					{% for bd in listedatabases %}
-						{% if bd != 'postgres' %}
+						{% if bd != 'postgres' and bd != 'information_schema' and bd != 'mysql' and bd != 'performance_schema' and bd != 'phpmyadmin' %}
 							<div class="form-group row">
 								<form method="post" action="">
 									<input type="hidden" name="basedonnee" value="{{ bd }}">

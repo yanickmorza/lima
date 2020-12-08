@@ -7,26 +7,26 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use App\LimaBundle\Services\UtilitaireDatabase;
+use App\LimaBundle\Scaffold\UtilitaireDatabase;
 use Twig\Loader\FilesystemLoader;
 use Twig\Environment;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\HttpKernel\KernelInterface;
-use App\LimaBundle\Services\Crud\ScaffoldCrudAuthUser;
-use App\LimaBundle\Services\Crud\ScaffoldCrudControleur;
-use App\LimaBundle\Services\Crud\ScaffoldCrudEntity;
-use App\LimaBundle\Services\Crud\ScaffoldCrudEnvironnement;
-use App\LimaBundle\Services\Crud\ScaffoldCrudExtension;
-use App\LimaBundle\Services\Crud\ScaffoldCrudForm;
-use App\LimaBundle\Services\Crud\ScaffoldCrudRelation;
-use App\LimaBundle\Services\Crud\ScaffoldCrudRepository;
-use App\LimaBundle\Services\Crud\ScaffoldCrudSecurity;
-use App\LimaBundle\Services\Crud\ScaffoldCrudSwiftMailerFunction;
-use App\LimaBundle\Services\Crud\ScaffoldCrudSwiftMailerYaml;
-use App\LimaBundle\Services\Crud\ScaffoldCrudTestEntity;
-use App\LimaBundle\Services\Crud\ScaffoldCrudVue;
+use App\LimaBundle\Scaffold\Postgres\ScaffoldPostgresAuthUser;
+use App\LimaBundle\Scaffold\Postgres\ScaffoldPostgresControleur;
+use App\LimaBundle\Scaffold\Postgres\ScaffoldPostgresEntity;
+use App\LimaBundle\Scaffold\Postgres\ScaffoldPostgresEnvironnement;
+use App\LimaBundle\Scaffold\Postgres\ScaffoldPostgresExtension;
+use App\LimaBundle\Scaffold\Postgres\ScaffoldPostgresForm;
+use App\LimaBundle\Scaffold\Postgres\ScaffoldPostgresRelation;
+use App\LimaBundle\Scaffold\Postgres\ScaffoldPostgresRepository;
+use App\LimaBundle\Scaffold\Postgres\ScaffoldPostgresSecurity;
+use App\LimaBundle\Scaffold\Postgres\ScaffoldPostgresSwiftMailerFunction;
+use App\LimaBundle\Scaffold\Postgres\ScaffoldPostgresSwiftMailerYaml;
+use App\LimaBundle\Scaffold\Postgres\ScaffoldPostgresTestEntity;
+use App\LimaBundle\Scaffold\Postgres\ScaffoldPostgresVue;
 
 class LimaController extends AbstractController
 {
@@ -63,9 +63,9 @@ class LimaController extends AbstractController
         $session = new Session();
         $db = $session->get('database');
 
-        $scaffoldCrudSwiftMailerYaml = new ScaffoldCrudSwiftMailerYaml;
-        $scaffoldCrudSwiftMailerFunction = new ScaffoldCrudSwiftMailerFunction;
-        $scaffoldCrudSwiftMailerYaml = new ScaffoldCrudSwiftMailerYaml;
+        $scaffoldPostgresSwiftMailerYaml = new ScaffoldPostgresSwiftMailerYaml;
+        $scaffoldPostgresSwiftMailerFunction = new ScaffoldPostgresSwiftMailerFunction;
+        $scaffoldPostgresSwiftMailerYaml = new ScaffoldPostgresSwiftMailerYaml;
         
         if ($request->request->get('_token') == 'swiftmailerYaml') {
 
@@ -77,7 +77,7 @@ class LimaController extends AbstractController
             $username = trim($request->request->get('username', null, true));
             $password = trim($request->request->get('password', null, true)); 
 
-            $scaffoldCrudSwiftMailerYaml->swiftMailerYaml($transport, $encryption, $auth_mode, $host, $port, $username, $password);
+            $scaffoldPostgresSwiftMailerYaml->swiftMailerPostgresYaml($transport, $encryption, $auth_mode, $host, $port, $username, $password);
             
             $this->addFlash('success', 'Le fichier "swiftmailer.yaml" a été regénéré avec succès');
 
@@ -89,7 +89,7 @@ class LimaController extends AbstractController
             $options = $request->request->get('options', null, true);
 
             foreach ($options as $objet) {
-                $scaffoldCrudSwiftMailerFunction->swiftMailerFunction($namespace, $objet);
+                $scaffoldPostgresSwiftMailerFunction->swiftMailerPostgresFunction($namespace, $objet);
             }
 
             $this->addFlash('success', 'L\'environement pour l\'envoi de mail a été créé avec succès');
@@ -99,7 +99,7 @@ class LimaController extends AbstractController
         }
         elseif ($request->request->get('_token') == 'supprimerswiftmailerYaml') {
 
-            $scaffoldCrudSwiftMailerYaml->supprimerSwiftMailerClass();
+            $scaffoldPostgresSwiftMailerYaml->supprimerSwiftMailerPostgresClass();
 
             $this->addFlash('success', 'L\'environement pour l\'envoi de mail a été supprimé avec succès');
 
@@ -165,8 +165,8 @@ class LimaController extends AbstractController
         $session = new Session();
         $db = $session->get('database');
 
-        $scaffoldCrudSecurity = new ScaffoldCrudSecurity;
-        $scaffoldCrudAuthUser = new ScaffoldCrudAuthUser;
+        $scaffoldPostgresSecurity = new ScaffoldPostgresSecurity;
+        $scaffoldPostgresAuthUser = new ScaffoldPostgresAuthUser;
 
         if ($request->request->get('_token') == 'generersecurite') {
 
@@ -176,7 +176,7 @@ class LimaController extends AbstractController
             $role = $request->request->get('role', null, true);
 
             foreach ($options as $objet) {
-                $scaffoldCrudSecurity->genererCrudSecurity($objet, $role, $securite, $namespace);
+                $scaffoldPostgresSecurity->genererPostgresSecurity($objet, $role, $securite, $namespace);
             }
 
             $this->addFlash('success', 'La sécurité ' . $securite . ' a été généré avec succès');
@@ -192,14 +192,14 @@ class LimaController extends AbstractController
 
             if ($authuser == "OUI") {
                 foreach ($options as $objet) {
-                    $scaffoldCrudAuthUser->genererCrudAuthuser($objet, $authuser, $namespace);
+                    $scaffoldPostgresAuthUser->genererPostgresAuthuser($objet, $authuser, $namespace);
                 }
                 $this->addFlash('success', 'La création de l\'interface d\'authentification avec la table ' . $objet . ' a été un succès');
             }
 
             if ($authuser == "SUPPRIMER") {
                 foreach ($options as $objet) {
-                    $scaffoldCrudAuthUser->supprimerCrudAuthuser($objet, $namespace);
+                    $scaffoldPostgresAuthUser->supprimerPostgresAuthuser($objet, $namespace);
                 }
                 $this->addFlash('success', 'La suppression de l\'interface d\'authentification a été un succès');
             }
@@ -225,7 +225,7 @@ class LimaController extends AbstractController
     {
         $session = new Session();
         $db = $session->get('database');
-        $scaffoldCrudRelation = new ScaffoldCrudRelation;
+        $scaffoldPostgresRelation = new ScaffoldPostgresRelation;
 
         if ($request->request->get('_token') == 'enregistrerrelation') {
 
@@ -235,7 +235,7 @@ class LimaController extends AbstractController
             $othernamespace = $request->request->get('othernamespace', null, true);
 
             foreach ($options as $option) {
-                $scaffoldCrudRelation->genererCrudRelation($option, $namespace, $relation, $othernamespace);
+                $scaffoldPostgresRelation->genererPostgresRelation($option, $namespace, $relation, $othernamespace);
             }
 
             $this->addFlash('success', 'La relation entre ces tables a été un succès');
@@ -259,13 +259,13 @@ class LimaController extends AbstractController
      */
     public function supprimeruncrud(Request $request, UtilitaireDatabase $utilitaireDatabase): Response
     {
-        $scaffoldCrudControleur = new ScaffoldCrudControleur;
-        $scaffoldCrudEntity = new ScaffoldCrudEntity;
-        $scaffoldCrudRepository = new ScaffoldCrudRepository;
-        $scaffoldCrudForm = new ScaffoldCrudForm;
-        $scaffoldCrudVue = new ScaffoldCrudVue;
-        $scaffoldCrudTestEntity = new ScaffoldCrudTestEntity;
-        $scaffoldCrudExtension = new ScaffoldCrudExtension;
+        $scaffoldPostgresControleur = new ScaffoldPostgresControleur;
+        $scaffoldPostgresEntity = new ScaffoldPostgresEntity;
+        $scaffoldPostgresRepository = new ScaffoldPostgresRepository;
+        $scaffoldPostgresForm = new ScaffoldPostgresForm;
+        $scaffoldPostgresVue = new ScaffoldPostgresVue;
+        $scaffoldPostgresTestEntity = new ScaffoldPostgresTestEntity;
+        $scaffoldPostgresExtension = new ScaffoldPostgresExtension;
 
         if ($request->request->get('_token') == 'supprimer') {
 
@@ -274,13 +274,13 @@ class LimaController extends AbstractController
 
             foreach ($options as $option) {
 
-                $scaffoldCrudControleur->supprimerCrudControleur($option, $namespace);
-                $scaffoldCrudEntity->supprimerCrudEntity($option, $namespace);
-                $scaffoldCrudRepository->supprimerCrudRepository($option, $namespace);
-                $scaffoldCrudForm->supprimerCrudForm($option, $namespace);
-                $scaffoldCrudVue->supprimerCrudVue($option, $namespace);
-                $scaffoldCrudTestEntity->supprimerCrudTestEntity($option, $namespace);
-                $scaffoldCrudExtension->supprimerCrudExtension($option, $namespace);
+                $scaffoldPostgresControleur->supprimerPostgresControleur($option, $namespace);
+                $scaffoldPostgresEntity->supprimerPostgresEntity($option, $namespace);
+                $scaffoldPostgresRepository->supprimerPostgresRepository($option, $namespace);
+                $scaffoldPostgresForm->supprimerPostgresForm($option, $namespace);
+                $scaffoldPostgresVue->supprimerPostgresVue($option, $namespace);
+                $scaffoldPostgresTestEntity->supprimerPostgresTestEntity($option, $namespace);
+                $scaffoldPostgresExtension->supprimerPostgresExtension($option, $namespace);
 
                 $this->addFlash('success', 'La suppression du SCRUD ' . $option . ' a été un succès');
             }
@@ -354,13 +354,13 @@ class LimaController extends AbstractController
      */
     public function genereruncrud(Request $request, UtilitaireDatabase $utilitaireDatabase): Response
     {
-        $scaffoldCrudControleur = new ScaffoldCrudControleur;
-        $scaffoldCrudEntity = new ScaffoldCrudEntity;
-        $scaffoldCrudRepository = new ScaffoldCrudRepository;
-        $scaffoldCrudForm = new ScaffoldCrudForm;
-        $scaffoldCrudVue = new ScaffoldCrudVue;
-        $scaffoldCrudTestEntity = new ScaffoldCrudTestEntity;
-        $scaffoldCrudExtension = new ScaffoldCrudExtension;
+        $scaffoldPostgresControleur = new ScaffoldPostgresControleur;
+        $scaffoldPostgresEntity = new ScaffoldPostgresEntity;
+        $scaffoldPostgresRepository = new ScaffoldPostgresRepository;
+        $scaffoldPostgresForm = new ScaffoldPostgresForm;
+        $scaffoldPostgresVue = new ScaffoldPostgresVue;
+        $scaffoldPostgresTestEntity = new ScaffoldPostgresTestEntity;
+        $scaffoldPostgresExtension = new ScaffoldPostgresExtension;
 
         if ($request->request->get('_token') == 'generer') {
 
@@ -371,13 +371,13 @@ class LimaController extends AbstractController
 
             foreach ($options as $option) {
 
-                $scaffoldCrudControleur->genererCrudControleur($option, $vue, $namespace);
-                $scaffoldCrudEntity->genererCrudEntity($option, $namespace);
-                $scaffoldCrudRepository->genererCrudRepository($option, $namespace);
-                $scaffoldCrudForm->genererCrudForm($option, $namespace);
-                $scaffoldCrudVue->genererCrudVue($option, $vue, $namespace);
-                $scaffoldCrudTestEntity->genererCrudTestEntity($option, $namespace);
-                $scaffoldCrudExtension->genererCrudExtension($option, $filtre, $namespace);
+                $scaffoldPostgresControleur->genererPostgresControleur($option, $vue, $namespace);
+                $scaffoldPostgresEntity->genererPostgresEntity($option, $namespace);
+                $scaffoldPostgresRepository->genererPostgresRepository($option, $namespace);
+                $scaffoldPostgresForm->genererPostgresForm($option, $namespace);
+                $scaffoldPostgresVue->genererPostgresVue($option, $vue, $namespace);
+                $scaffoldPostgresTestEntity->genererPostgresTestEntity($option, $namespace);
+                $scaffoldPostgresExtension->genererPostgresExtension($option, $filtre, $namespace);
 
                 $this->addFlash('success', 'La création du SCRUD ' . $option . ' a été un succès');
             }
@@ -405,7 +405,7 @@ class LimaController extends AbstractController
     public function basesettables(Request $request, UtilitaireDatabase $utilitaireDatabase): Response
     {
         $session = new Session();
-        $scaffoldCrudEnvironnement = new ScaffoldCrudEnvironnement();
+        $scaffoldPostgresEnvironnement = new ScaffoldPostgresEnvironnement();
 
         // ---- Liste database et table ----
         if ($request->request->get('basedonnee')) {
@@ -445,7 +445,7 @@ class LimaController extends AbstractController
 
             // --- Generer environnement ---
             if ($request->request->get('_token') == 'environnement') {
-                $scaffoldCrudEnvironnement->envDoctrineYaml();
+                $scaffoldPostgresEnvironnement->envDoctrinePostgresYaml();
                 $this->addFlash('success', 'Le nouvel environnement a été créé avec succès');
                 return $this->redirectToRoute('basesettables');
             }
@@ -622,4 +622,3 @@ class LimaController extends AbstractController
         // ---- Liste database et table ----
     }
 }
-

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\LimaBundle\Services\Crud;
+namespace App\LimaBundle\Scaffold\Postgres;
 
-use App\LimaBundle\Services\UtilitaireDatabase;
+use App\LimaBundle\Scaffold\UtilitaireDatabase;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class ScaffoldCrudRepository
+class ScaffoldPostgresRepository
 {
     // ---- Generer un Repository ----
-    public function genererCrudRepository($objet, $namespace)
+    public function genererPostgresRepository($objet, $namespace)
     {
         $session = new Session();
         $db = $session->get('database');
@@ -201,7 +201,7 @@ class $ObjetRepository extends EntityRepository implements ServiceEntityReposito
     }
     // ---- Generer un Repository ----
     // --- Supprimer un Repository ---
-    public function supprimerCrudRepository($objet, $namespace)
+    public function supprimerPostgresRepository($objet, $namespace)
     {
         if ($namespace !== null) {
             $path_repository = "../src/Repository/" . $namespace . "/" . ucfirst($objet) . "Repository.php";

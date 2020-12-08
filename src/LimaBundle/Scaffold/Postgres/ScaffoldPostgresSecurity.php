@@ -1,11 +1,10 @@
 <?php 
 
-namespace App\LimaBundle\Services\Crud;
+namespace App\LimaBundle\Scaffold\Postgres;
 
-class ScaffoldCrudSecurity
+class ScaffoldPostgresSecurity
 {
-
-    public function genererCrudSecurity($objet, $role, $securite, $namespace)
+    public function genererPostgresSecurity($objet, $role, $securite, $namespace)
     {
         // *** Préparer l'écriture dans le Controller ****
         if ($namespace !== null) {

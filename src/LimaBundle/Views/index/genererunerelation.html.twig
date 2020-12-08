@@ -28,7 +28,7 @@
     <div class="col-5">
     <label for="tables" class="col-2 col-form-label">Bases</label>
         {% for bd in listedatabases %}
-            {% if bd != 'postgres' %}
+            {% if bd != 'postgres' and bd != 'information_schema' and bd != 'mysql' and bd != 'performance_schema' and bd != 'phpmyadmin' %}
                 <div class="form-group row">
                     <input type="checkbox" name="othernamespace[]" value="{{ bd }}" title="Cocher la base de donnée concernée {{ bd }}">&nbsp;&nbsp;{{ bd | capitalize }}
                 </div>

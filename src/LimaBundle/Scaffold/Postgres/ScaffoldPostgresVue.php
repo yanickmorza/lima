@@ -1,14 +1,14 @@
 <?php
 
-namespace App\LimaBundle\Services\Crud;
+namespace App\LimaBundle\Scaffold\Postgres;
 
-use App\LimaBundle\Services\UtilitaireDatabase;
+use App\LimaBundle\Scaffold\UtilitaireDatabase;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class ScaffoldCrudVue
+class ScaffoldPostgresVue
 {
     // ------- Generer une vue -------
-    public function genererCrudVue($objet, $vue, $namespace)
+    public function genererPostgresVue($objet, $vue, $namespace)
     {
         $session = new Session();
         $db = $session->get('database');
@@ -438,7 +438,7 @@ class ScaffoldCrudVue
     // ------- Generer une vue -------
 
     // ------ Supprimer une vue ------
-    public function supprimerCrudVue($objet, $namespace)
+    public function supprimerPostgresVue($objet, $namespace)
     {
         if ($namespace !== null) {
             $path_vue = "../templates/" . $namespace . "/" . $objet;

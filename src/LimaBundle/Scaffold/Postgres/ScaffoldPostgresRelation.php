@@ -1,13 +1,13 @@
 <?php
 
-namespace App\LimaBundle\Services\Crud;
+namespace App\LimaBundle\Scaffold\Postgres;
 
-use App\LimaBundle\Services\UtilitaireDatabase;
+use App\LimaBundle\Scaffold\UtilitaireDatabase;
 
-class ScaffoldCrudRelation
+class ScaffoldPostgresRelation
 {
     // ---- Generer une Relation entre plusieurs tables ----
-    public function genererCrudRelation($objet, $namespace, $relation, $othernamespace)
+    public function genererPostgresRelation($objet, $namespace, $relation, $othernamespace)
     {
         $utilitaireDatabase = new UtilitaireDatabase;
 

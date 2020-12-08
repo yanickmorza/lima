@@ -1,13 +1,13 @@
 <?php
 
-namespace App\LimaBundle\Services\Crud;
+namespace App\LimaBundle\Scaffold\Postgres;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class ScaffoldCrudControleur
+class ScaffoldPostgresControleur
 {
     // ---- Generer un Controller ----
-    public function genererCrudControleur($objet, $vue, $namespace)
+    public function genererPostgresControleur($objet, $vue, $namespace)
     {
         $session = new Session();
         $db = $session->get('database');
@@ -391,7 +391,7 @@ class $ObjetCreate extends AbstractController
     // ---- Generer un Controller ----
 
     // --- Supprimer un Controller ---
-    public function supprimerCrudControleur($objet, $namespace)
+    public function supprimerPostgresControleur($objet, $namespace)
     {
         if ($namespace !== null) {
             $path_controller = "../src/Controller/" . $namespace . "/" . ucfirst($objet) . "Controller.php";

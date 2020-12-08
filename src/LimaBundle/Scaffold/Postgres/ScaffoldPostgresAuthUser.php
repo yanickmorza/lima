@@ -1,14 +1,14 @@
 <?php
 
-namespace App\LimaBundle\Services\Crud;
+namespace App\LimaBundle\Scaffold\Postgres;
 
 use Symfony\Component\HttpFoundation\Session\Session;
-use App\LimaBundle\Services\UtilitaireDatabase;
+use App\LimaBundle\Scaffold\UtilitaireDatabase;
 
-class ScaffoldCrudAuthUser
+class ScaffoldPostgresAuthUser
 {
-    // -------------- Generer un CrudAuthuser -------------
-    public function genererCrudAuthuser($option, $authuser, $namespace)
+    // -------------- Generer Authuser -------------
+    public function genererPostgresAuthuser($option, $authuser, $namespace)
     {
         if ($authuser == "OUI") {
 
@@ -879,10 +879,10 @@ class RegistrationFormType extends AbstractType
             // ---------- Construction de security.yaml ----------
         }
     }
-    // -------------- Generer un CrudAuthuser -------------
+    // -------------- Generer Authuser -------------
 
-    // ------------ Supprimer un CrudAuthuser -------------
-    public function supprimerCrudAuthuser($option, $namespace)
+    // ------------ Supprimer Authuser -------------
+    public function supprimerPostgresAuthuser($option, $namespace)
     {
         // ----- Supprimer la class Authentification ------
         $path_class = "../src/Authentification";
@@ -1016,7 +1016,7 @@ class RegistrationFormType extends AbstractType
 ";
 
         file_put_contents($fichier_security, $texte_security);
-    // ---------- Construction de security.yaml -----------
+    // ------- Construction de security.yaml -------
     }
-    // ------------ Supprimer un CrudAuthuser -------------
+    // ------------ Supprimer Authuser -------------
 }

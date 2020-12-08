@@ -1,13 +1,13 @@
 <?php
 
-namespace App\LimaBundle\Services\Crud;
+namespace App\LimaBundle\Scaffold\Postgres;
 
-use App\LimaBundle\Services\UtilitaireDatabase;
+use App\LimaBundle\Scaffold\UtilitaireDatabase;
 
-class ScaffoldCrudEntity
+class ScaffoldPostgresEntity
 {
     // ---- Generer un Entity ----
-    public function genererCrudEntity($objet, $namespace)
+    public function genererPostgresEntity($objet, $namespace)
     {
         $utilitaireDatabase = new UtilitaireDatabase;
 
@@ -231,7 +231,7 @@ class $Objet
     // ---- Generer un Entity ----
 
     // --- Supprimer un Entity ---
-    public function supprimerCrudEntity($objet, $namespace)
+    public function supprimerPostgresEntity($objet, $namespace)
     {
         if ($namespace !== null) {
             $path_entity = "../src/Entity/" . $namespace . "/" . ucfirst($objet) . ".php";

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\LimaBundle\Services\Crud;
+namespace App\LimaBundle\Scaffold\Postgres;
 
-use App\LimaBundle\Services\UtilitaireDatabase;
+use App\LimaBundle\Scaffold\UtilitaireDatabase;
 
-class ScaffoldCrudForm
+class ScaffoldPostgresForm
 {
     // ---- Generer un FORM ----
-    public function genererCrudForm($objet, $namespace)
+    public function genererPostgresForm($objet, $namespace)
     {
         $utilitaireDatabase = new UtilitaireDatabase;
         if ($namespace !== null) {
@@ -221,7 +221,7 @@ class $ObjetCreate extends AbstractType
     // ---- Generer un FORM ----
 
     // --- Supprimer un FORM ---
-    public function supprimerCrudForm($objet, $namespace)
+    public function supprimerPostgresForm($objet, $namespace)
     {
         if ($namespace !== null) {
             $path_form = "../src/Form/" . $namespace . "/" . ucfirst($objet) . "Type.php";
