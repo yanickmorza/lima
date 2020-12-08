@@ -40,8 +40,11 @@ class LimaController extends AbstractController
         if ($request->request->get('basedonnee')) {
             $session->set('database', $request->request->get('basedonnee'));
             $db = $session->get('database');
-        } else {
+            $driver = $session->get('driver');
+        } 
+        else {
             $db = $session->get('database');
+            $driver = $session->get('driver');
         }
 
         $loader = new FilesystemLoader($this->getParameter('kernel.project_dir') . '/src/LimaBundle/Views/index/');
@@ -52,6 +55,7 @@ class LimaController extends AbstractController
             'listetables' => $utilitaireDatabase->listerTables(),
             'affichebasedonnee' => $db,
             'listedatabases' => $utilitaireDatabase->listerDatabases(),
+            'driver' => $driver
         ]));
     }
 
