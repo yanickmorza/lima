@@ -10,6 +10,11 @@
             "email": "yanick.morza@free.fr"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "App\\LimaBundle\\": "vendor/yanickmorza/lima/LimaBundle/"
+        }
+    },
     "require": {
         "php": "^7.2"
     },
