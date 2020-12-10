@@ -17,7 +17,7 @@
 - 3 - <code>composer update</code>
 
 - 4 - Ecrire son mot de passe PostgreSQL dans le fichier :
-<code>/src/LimaBundle/Scaffold/ConnexionDatabase.php</code>
+<code>/vendor/yanickmorza/limabundle/src/Scaffold/ConnexionDatabase.php</code>
 
 # Démarrer
 
