@@ -1,6 +1,5 @@
 {
     "name": "yanickmorza/lima",
-    "type": "app-symfony",
     "description": "Light Interface Maker Application",
     "homepage": "https://github.com/yanickmorza/lima",
     "license": "MIT",
