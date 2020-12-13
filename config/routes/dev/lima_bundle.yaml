@@ -1,4 +1,0 @@
-app_file:
-    # Charge les routes à partir du fichier de routage donnée stockée dans un Bundle
-    resource: '@LimaBundle/Resources/config/routing_dev.yaml'
-    prefix: /lima
