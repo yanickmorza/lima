@@ -40,7 +40,7 @@
         "symfony/yaml": "5.2.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0",
-        "yanickmorza/limabundle": "1.1.9.x-dev"
+        "yanickmorza/limabundle": "1.2.0.x-dev"
     },
     "require-dev": {
         "symfony/browser-kit": "^5.2",
