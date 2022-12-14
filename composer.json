@@ -25,7 +25,7 @@
     },
     "scripts": {
         "post-update-cmd": [
-            "@php vendor/yanickmorza/lima/src/Command/lima.php",
+            "@php vendor/yanickmorza/lima/src/Command/lima-ci.php",
             "@auto-scripts"
         ]
     },
