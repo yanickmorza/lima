@@ -13,6 +13,6 @@
 
 # Démarrer
 
-<code>php spark serve</code>
+- 1 - <code>php spark serve</code>
 
 - 2 - Ouvrir votre navigateur internet en http : <a href="http://localhost:8008/lima/">http://localhost:8080/lima/</a>
